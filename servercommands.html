@@ -36,38 +36,57 @@
                 <ul class="nav navbar-nav">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="howtojoin.html">How to join</a></li>
-                    <!--<li class="active"><a href="servercommands.html">Server commands</a></li>-->
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="whitelist.html" class="whitelist-link">Whitelist request</a></li>
+                    <li class="active"><a href="servercommands.html">Server commands</a></li>
+                    <li><a href="whitelist.html">Whitelist me</a></li>
                 </ul>
             </div>
         </div>
     </nav>
     <div class="container">
         <h1>Server commands</h1>
-        <strong>WIP</strong>
-        <!--
         <div class="plugin">
-            <h3>PrivateAreaProtector</h3>
-            <p>You can private areas to protect your builds.</p>
-            <h4>Commands:</h4>
+            <h3>SetHome</h3>
             <ul>
-                <li><code>/protect pos1</code> - Sets the first position to your current coordinates.</li>
-                <li><code>/protect pos2</code> - Sets the second position to your current coordinates.</li>
-                <li><code>/protect</code> - Sets the area designed by /protect pos1 and /protect pos2 to your private area.</li>
+                <li><code>/sethome</code> - set a home point.</li>
+                <li><code>/home</code> - return to the home point.</li>
+            </ul>
+        </div>
+        <div class="plugin">
+            <h3>TimeVote</h3>
+            <ul>
+                <li><code>/vote &lt;day/night&gt; </code> - start a vote in the world.</li>
+                <li><code>/vote &lt;yes/no&gt; </code> - vote for a started vote.</li>
             </ul>
         </div>
         <div class="plugin">
             <h3>TeleportRequest</h3>
-            <h4>Commands:</h4>
             <ul>
                 <li><code>/tpa</code> - Request to be teleported to another user.</li>
                 <li><code>/tphere</code> - Request to teleport a user to you.</li>
                 <li><code>/tpaccept</code> - Accept a teleport request.</li>
                 <li><code>/tpdeny</code> - Deny a teleport request.</li>
             </ul>
-        </div>-->
+        </div>
+        <div class="plugin">
+            <h3>BlockProtect</h3>
+            <ul>
+                <li><code>/bp lock/protect</code> - Protect a block.</li>
+                <li><code>/bp unlock/unprotect</code> - Unprotect a block.</li>
+                <li><code>/bp add/addmember &lt;player&gt;</code> - Allow other players to interact with a block.</li>
+                <li><code>/bp remove/removememeber/rmmember &lt;player&gt;</code> - Disallow other players to interact with a block.</li>
+                <li><code>/bp info</code> - Get Information about block</li>
+            </ul>
+        </div>
+        <div class="plugin">
+            <h3>SimpleWarp</h3>
+            <ul>
+                <li><code>/addwarp &lt;warpname&gt;</code> - Add a new warp. [admin only]</li>
+                <li><code>/delwarp &lt;warpname&gt;</code> - Delete a warp. [admin only]</li>
+                <li><code>/warp &lt;warpname&gt;</code> - Teleport to a warp..</li>
+                <li><code>/openwarp &lt;warpname&gt;</code> - Make a warp public(allow non-ops to use it).</li>
+                <li><code>/closewarp &lt;warpname&gt;</code> - Make a warp private.</li>
+            </ul>
+        </div>
     </div>
     <br><br><br>
     <iframe src="footer.html" style="width: 100%; height: 40px; border: none; overflow: hidden;"></iframe>

@@ -85,17 +85,6 @@ body {
     color: #dcdcdc !important;
 }
 
-.navbar-nav > li > a.whitelist-link {
-    background-color: #5cb85c;
-    color: white !important;
-    border-radius: 4px;
-    margin: 8px 0px;
-    padding: 8px 12px;
-}
-.navbar-nav > li > a.whitelist-link:hover {
-    background-color: #4cae4c;
-}
-
 #youtube-grid .col-xs-6 {
     margin-bottom: 15px;
 }

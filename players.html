@@ -3,20 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Whitelist | AlphaStone</title>
+    <title>Players | AlphaStone</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
     <style>
-        .plugin {
-            margin-bottom: 30px;
-        }
-        .plugin h3 {
-            margin-bottom: 10px;
+        .list-group-item {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
         }
 
-        code {
-            background-color: #333 !important;
-            color: #dcdcdc !important;
+        .list-group-item::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: url(nav_bg.png);
+            background-position: center;
+            filter: brightness(50%);
+            z-index: -1;
         }
     </style>
 </head>
@@ -37,20 +41,36 @@
                     <li><a href="index.html">Home</a></li>
                     <li><a href="howtojoin.html">How to join</a></li>
                     <li><a href="servercommands.html">Server commands</a></li>
-                    <li><a href="players.html">Statistics</a></li>
-                    <li class="active"><a href="whitelist.html">Whitelist me</a></li>
+                    <li class="active"><a href="players.html">Statistics</a></li>
+                    <li><a href="whitelist.html">Whitelist me</a></li>
                 </ul>
             </div>
         </div>
     </nav>
     <div class="container">
-        <h1>Whitelist</h1>
-        <h4>Fill out the form below or join <a href="https://discord.gg/7DUHv5GbDt">our Discord server</a> and write your nickname in the <b>#whitelist</b> channel.</h4>
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf_oEDpJQmIWAnCmfX14ZdtWMouDFKL-FIWHO73YwBKzmJTdA/viewform?embedded=true" width="600" height="600" frameborder="0" marginheight="0" marginwidth="0">Загрузка…</iframe>
+        <h1>Statistics</h1>
+        <ul id="player-list" class="list-group"></ul>
     </div>
     <br><br><br>
     <iframe src="footer.html" style="width: 100%; height: 40px; border: none; overflow: hidden;"></iframe>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+
+    <script>
+    fetch('https://webservices-for-alphastone.onrender.com/player_statistics.json')
+      .then(res => res.json())
+      .then(data => {
+        const list = document.getElementById('player-list');
+        data
+        .sort((a, b) => a.username.localeCompare(b.username))
+        .forEach(player => {
+            const li = document.createElement('li');
+            li.className = 'list-group-item';
+            li.style = 'font-size: 20px;';
+            li.innerHTML = `<a href="player.html?nickname=${encodeURIComponent(player.username)}">${player.username}</a>`;
+            list.appendChild(li);
+        });
+      });
+  </script>
 </body>
 </html>

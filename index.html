@@ -101,6 +101,10 @@
                 <p><strong>Port:</strong> 13804</p>
                 <p><strong><a href="https://discord.gg/7DUHv5GbDt">Join Our Discord</a></strong></p>
                 <p><strong><strong><a href="https://archive.org/download/MCPEAlpha/PE-a0.8.1.apk">Download vanilla client</a></strong></p>
+                <h3>Server Status</h3>
+                <div id="server-status">
+                    <p><em>Checking server...</em></p>
+                </div>
                 <h3>Discord</h3>
                 <iframe src="https://discordapp.com/widget?id=927828231065833553&theme=dark" width="100%" height="300px" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts" style="border: none; overflow: hidden;"></iframe>
             </div>
@@ -122,5 +126,33 @@
             }
         }, false);
     </script>
+    <script>
+    function updateServerStatus() {
+        fetch('https://api.mcsrvstat.us/3/alphastone.ddns.net:13804')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('server-status');
+                if (!data || data.error) {
+                    container.innerHTML = '<p style="color: red;"><b>Offline</b></p>';
+                    return;
+                }
+
+                const onlineStatus = data.online ? '<span style="color: green;">Online</span>' : '<span style="color: red;">Offline</span>';
+                const players = data.players ? `${data.players.online} / ${data.players.max}` : 'N/A';
+
+                container.innerHTML = `
+                    <p><strong>Status:</strong> ${onlineStatus}</p>
+                    <p><strong>Players:</strong> ${players}</p>
+                `;
+            })
+            .catch(err => {
+                document.getElementById('server-status').innerHTML = '<p style="color: red;"><b>Error loading status</b></p>';
+                console.error('Status load error:', err);
+            });
+    }
+
+    setInterval(updateServerStatus, 10000);
+    updateServerStatus();
+</script>
 </body>
 </html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Commands | AlphaStone</title>
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .plugin-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .plugin-card h3 {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-color);
+            font-weight: 600;
+        }
+
+        .command-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .command-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            background: var(--light-bg);
+            border-left: 3px solid var(--header-gray);
+        }
+
+        .command-item code {
+            background: var(--header-gray) !important;
+            color: white !important;
+            padding: 0.3rem 0.6rem;
+            font-size: 0.9em;
+            margin-right: 1rem;
+            min-width: 200px;
+            display: inline-block;
+        }
+
+        .command-description {
+            color: var(--text-muted);
+            flex: 1;
+        }
+
+        .admin-badge {
+            background: var(--danger-color);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .plugin-card {
+                padding: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .command-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .command-item code {
+                margin-right: 0;
+                margin-bottom: 0.5rem;
+                min-width: auto;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .plugin-card {
+                padding: 1rem;
+            }
+
+            .command-item {
+                padding: 0.5rem;
+            }
+
+            .plugin-card h3 {
+                font-size: 1.1rem;
+            }
+
+            .command-item code {
+                font-size: 0.8rem;
+                padding: 0.25rem 0.5rem;
+            }
+
+            .command-description {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="alphastone_logo.png" alt="AlphaStone">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="howtojoin.html">How to Join</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="servercommands.html">Commands</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="players.html">Statistics</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="whitelist.html">Whitelist</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div style="height: 80px;"></div>
+
+    <div class="container content-section">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <h1 class="mb-4 text-center">Server Commands</h1>
+                
+                <div class="plugin-card">
+                    <h3>SetHome</h3>
+                    <ul class="command-list">
+                        <li class="command-item">
+                            <code>/sethome</code>
+                            <span class="command-description">Set a home point at your current location.</span>
+                        </li>
+                        <li class="command-item">
+                            <code>/home</code>
+                            <span class="command-description">Teleport back to your home point.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="plugin-card">
+                    <h3>TimeVote</h3>
+                    <ul class="command-list">
+                        <li class="command-item">
+                            <code>/vote &lt;day/night&gt;</code>
+                            <span class="command-description">Start a vote to change the time in the world.</span>
+                        </li>
+                        <li class="command-item">
+                            <code>/vote &lt;yes/no&gt;</code>
+                            <span class="command-description">Vote for or against a started time vote.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="plugin-card">
+                    <h3>TeleportRequest</h3>
+                    <ul class="command-list">
+                        <li class="command-item">
+                            <code>/tpa &lt;player&gt;</code>
+                            <span class="command-description">Request to be teleported to another player.</span>
+                        </li>
+                        <li class="command-item">
+                            <code>/tphere &lt;player&gt;</code>
+                            <span class="command-description">Request to teleport a player to your location.</span>
+                        </li>
+                        <li class="command-item">
+                            <code>/tpaccept</code>
+                            <span class="command-description">Accept an incoming teleport request.</span>
+                        </li>
+                        <li class="command-item">
+                            <code>/tpdeny</code>
+                            <span class="command-description">Deny an incoming teleport request.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="plugin-card">
+                    <h3>BlockProtect</h3>
+                    <ul class="command-list">
+                        <li class="command-item">
+                            <code>/bp lock</code>
+                            <span class="command-description">Protect a block from being modified by others.</span>
+                        </li>
+                        <li class="command-item">
+                            <code>/bp unlock</code>
+                            <span class="command-description">Remove protection from a block.</span>
+                        </li>
+                        <li class="command-item">
+                            <code>/bp add &lt;player&gt;</code>
+                            <span class="command-description">Allow another player to interact with your protected block.</span>
+                        </li>
+                        <li class="command-item">
+                            <code>/bp remove &lt;player&gt;</code>
+                            <span class="command-description">Remove a player's access to your protected block.</span>
+                        </li>
+                        <li class="command-item">
+                            <code>/bp info</code>
+                            <span class="command-description">Get information about a protected block.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="plugin-card">
+                    <h3>SimpleWarp</h3>
+                    <ul class="command-list">
+                        <li class="command-item">
+                            <code>/addwarp &lt;name&gt;</code>
+                            <span class="command-description">Add a new warp point. <span class="admin-badge">ADMIN ONLY</span></span>
+                        </li>
+                        <li class="command-item">
+                            <code>/delwarp &lt;name&gt;</code>
+                            <span class="command-description">Delete an existing warp point. <span class="admin-badge">ADMIN ONLY</span></span>
+                        </li>
+                        <li class="command-item">
+                            <code>/warp &lt;name&gt;</code>
+                            <span class="command-description">Teleport to a warp point.</span>
+                        </li>
+                        <li class="command-item">
+                            <code>/openwarp &lt;name&gt;</code>
+                            <span class="command-description">Make a warp public (allow non-ops to use it).</span>
+                        </li>
+                        <li class="command-item">
+                            <code>/closewarp &lt;name&gt;</code>
+                            <span class="command-description">Make a warp private (ops only).</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2025 AlphaStone. This website is not affiliated with Mojang, Microsoft, or any other entity.</p>
+        </div>
+    </footer>
+
+    <script src="bootstrap.bundle.min.js"></script>
+</body>
+</html>

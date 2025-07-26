@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Join | AlphaStone</title>
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .instruction-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .step-number {
+            background: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .step-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .step-content p {
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        .server-details {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-left: 3px solid var(--primary-color);
+            margin: 1rem 0;
+        }
+
+        .server-details h4 {
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .server-details .detail-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .server-details .detail-item strong {
+            margin-right: 0.5rem;
+            min-width: 50px;
+        }
+
+        code {
+            background: var(--header-gray) !important;
+            color: white !important;
+            padding: 0.2rem 0.4rem;
+            font-size: 0.9em;
+        }
+
+        .enjoy-section {
+            text-align: center;
+            padding: 2rem;
+            background: var(--success-color);
+            color: white;
+            margin-top: 2rem;
+        }
+
+        .enjoy-section h2 {
+            margin: 0;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .instruction-card {
+                padding: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .step-number {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+
+            .step-content h3 {
+                font-size: 1.1rem;
+            }
+
+            .server-details {
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .instruction-card {
+                padding: 1rem;
+            }
+
+            .step-number {
+                width: 30px;
+                height: 30px;
+                font-size: 0.8rem;
+                margin-right: 0.75rem;
+            }
+
+            .step-content h3 {
+                font-size: 1rem;
+            }
+
+            .server-details {
+                padding: 0.75rem;
+            }
+
+            .enjoy-section {
+                padding: 1.5rem;
+            }
+
+            .enjoy-section h2 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="alphastone_logo.png" alt="AlphaStone">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="howtojoin.html">How to Join</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="servercommands.html">Commands</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="players.html">Statistics</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="whitelist.html">Whitelist</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div style="height: 80px;"></div>
+
+    <div class="container content-section">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="mb-4 text-center">How to Join</h1>
+                
+                <div class="instruction-card">
+                    <div class="d-flex align-items-start">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Launch Minecraft PE and click <code>Play</code>.</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instruction-card">
+                    <div class="d-flex align-items-start">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>In the world selection screen click <code>Edit</code>.</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instruction-card">
+                    <div class="d-flex align-items-start">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Click <code>External</code> to add a new server.</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instruction-card">
+                    <div class="d-flex align-items-start">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Enter Server Details</h3>
+                            <div class="server-details">
+                                <div class="detail-item">
+                                    <strong>Server Name:</strong> AlphaStone
+                                </div>
+                                <div class="detail-item">
+                                    <strong>Address:</strong> alphastone.ddns.net
+                                </div>
+                                <div class="detail-item">
+                                    <strong>Port:</strong> 13804
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instruction-card">
+                    <div class="d-flex align-items-start">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h3>Click <code>Add Server</code> to save the server to list, then click on it!</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="enjoy-section">
+                    <h2>Enjoy!</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2025 AlphaStone. This website is not affiliated with Mojang, Microsoft, or any other entity.</p>
+        </div>
+    </footer>
+
+    <script src="bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlphaStone | MCPE 0.8.1 Server Since 2021</title>
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="alphastone_logo.png" alt="AlphaStone">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="howtojoin.html">How to Join</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="servercommands.html">Commands</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="players.html">Statistics</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="whitelist.html">Whitelist</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div style="height: 80px;"></div>
+
+    <div class="hero-section">
+        <h1 class="hero-title">AlphaStone</h1>
+        <p class="hero-subtitle">Minecraft PE 0.8.1 Server Since 2021</p>
+    </div>
+
+    <div class="container content-section">
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="server-info">
+                    <h3 class="mb-3">Server Information</h3>
+                    <div class="info-item">
+                        <div>
+                            <strong>IP:</strong> alphastone.ddns.net
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div>
+                            <strong>Port:</strong> 13804
+                        </div>
+                    </div>
+                    <div class="info-item" id="server-status">
+                        <div>Checking server status...</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="buttons-section">
+                    <h3 class="mb-3">Quick Actions</h3>
+                    <div class="d-grid gap-2">
+                        <a href="https://discord.gg/7DUHv5GbDt" class="btn btn-primary" target="_blank">
+                            Join Discord
+                        </a>
+                        <a href="whitelist.html" class="btn btn-success">
+                            Whitelist me
+                        </a>
+                        <a href="https://archive.org/download/MCPEAlpha/PE-a0.8.1.apk" class="btn btn-warning" target="_blank">
+                            Download Client
+                        </a>
+                        <a href="players.html" class="btn btn-outline-secondary">
+                            View Statistics
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="vote-section">
+                    <h3 class="mb-3">Vote for Server</h3>
+                    <script src="https://minecraftpocket-servers.com/embed.js?id=131217&type=votes"></script>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2025 AlphaStone. This website is not affiliated with Mojang, Microsoft, or any other entity.</p>
+        </div>
+    </footer>
+
+    <script src="bootstrap.bundle.min.js"></script>
+    <script>
+        function updateServerStatus() {
+            fetch('https://api.mcsrvstat.us/3/alphastone.ddns.net:13804')
+                .then(response => response.json())
+                .then(data => {
+                    const container = document.getElementById('server-status');
+                    if (!data || data.error) {
+                        container.innerHTML = `
+                            <div><span class="status-offline">Offline</span></div>
+                        `;
+                        return;
+                    }
+
+                    const isOnline = data.online;
+                    const players = data.players ? `${data.players.online}/${data.players.max}` : 'N/A';
+                    const statusClass = isOnline ? 'status-online' : 'status-offline';
+
+                    container.innerHTML = `
+                        <div>
+                            <div><span class="${statusClass}">${isOnline ? 'Online' : 'Offline'}</span></div>
+                            <small class="text-muted">Players: ${players}</small>
+                        </div>
+                    `;
+                })
+                .catch(err => {
+                    document.getElementById('server-status').innerHTML = `
+                        <div><span class="text-muted">Error loading status</span></div>
+                    `;
+                    console.error('Status load error:', err);
+                });
+        }
+
+        setInterval(updateServerStatus, 10000);
+        updateServerStatus();
+    </script>
+</body>
+</html>

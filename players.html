@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics | AlphaStone</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .stats-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .stats-card h1 {
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-color);
+            font-weight: 600;
+        }
+
+        .player-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .player-item {
+            background: var(--light-bg);
+            border: 1px solid var(--border-color);
+            margin-bottom: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .player-item:hover {
+            background: var(--card-bg);
+            border-color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        .player-link {
+            display: block;
+            padding: 1rem 1.5rem;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        .player-link:hover {
+            color: var(--primary-color);
+        }
+
+        .loading-spinner {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+        }
+
+        .error-message {
+            background: var(--danger-color);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .player-count {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .stats-card {
+                padding: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .player-link {
+                padding: 0.75rem 1rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .stats-card {
+                padding: 1rem;
+            }
+
+            .player-link {
+                padding: 0.6rem 0.8rem;
+                font-size: 0.95rem;
+            }
+
+            .stats-card h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="alphastone_logo.png" alt="AlphaStone">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="howtojoin.html">How to Join</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="servercommands.html">Commands</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="players.html">Statistics</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="whitelist.html">Whitelist</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div style="height: 80px;"></div>
+
+    <div class="container content-section">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="stats-card">
+                    <h1>Player Statistics</h1>
+                    
+                    <div id="loading" class="loading-spinner">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-2">Loading player statistics...</p>
+                    </div>
+
+                    <div id="error" class="error-message" style="display: none;">
+                        Failed to load player statistics. Please try again later.
+                    </div>
+
+                    <div id="player-count" class="player-count" style="display: none;">
+                        Total Players: <span id="count">0</span>
+                    </div>
+
+                    <ul id="player-list" class="player-list" style="display: none;"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2025 AlphaStone. This website is not affiliated with Mojang, Microsoft, or any other entity.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function loadPlayerStatistics() {
+            const loading = document.getElementById('loading');
+            const error = document.getElementById('error');
+            const playerCount = document.getElementById('player-count');
+            const playerList = document.getElementById('player-list');
+            const countSpan = document.getElementById('count');
+
+            fetch('https://webservices-for-alphastone.onrender.com/player_statistics.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    loading.style.display = 'none';
+                    
+                    if (data && data.length > 0) {
+                        countSpan.textContent = data.length;
+                        playerCount.style.display = 'block';
+                        playerList.style.display = 'block';
+
+                        const sortedPlayers = data.sort((a, b) => a.username.localeCompare(b.username));
+                        
+                        sortedPlayers.forEach(player => {
+                            const li = document.createElement('li');
+                            li.className = 'player-item';
+                            
+                            const link = document.createElement('a');
+                            link.href = `player.html?nickname=${encodeURIComponent(player.username)}`;
+                            link.className = 'player-link';
+                            link.textContent = player.username;
+                            
+                            li.appendChild(link);
+                            playerList.appendChild(li);
+                        });
+                    } else {
+                        loading.style.display = 'none';
+                        error.textContent = 'No player statistics available.';
+                        error.style.display = 'block';
+                    }
+                })
+                .catch(err => {
+                    console.error('Error loading player statistics:', err);
+                    loading.style.display = 'none';
+                    error.style.display = 'block';
+                });
+        }
+
+        loadPlayerStatistics();
+    </script>
+</body>
+</html>

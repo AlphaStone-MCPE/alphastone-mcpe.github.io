@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blacklist | AlphaStone</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        table, thead, tbody, tr, th, td {
+            background: transparent !important;
+        }
+
+        .table-bordered > tbody > tr > td,
+        .table-bordered > thead > tr > th {
+            border-color: rgba(255, 255, 255, 0.2) !important;
+        }
+
+        #search,
+        #filterTime {
+            background: transparent !important;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        #search::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        option {
+            background: #222;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html"><img src="alphastone_logo.png" width="130px"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="howtojoin.html">How to join</a></li>
+                    <li><a href="servercommands.html">Server commands</a></li>
+                    <li class="active"><a href="blacklist.html">Blacklist</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Blacklist</h1>
+        <p>List of banned players of the server</p>
+
+        <div class="row">
+            <div class="col-md-4">
+                <input id="search" type="text" class="form-control" placeholder="Search...">
+            </div>
+            <div class="col-md-4">
+                <select id="filterTime" class="form-control">
+                    <option value="all">All dates</option>
+                </select>
+            </div>
+        </div>
+
+        <br>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Nickname</th>
+                    <th>Reason</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody id="banTable"></tbody>
+        </table>
+    </div>
+
+    <br><br><br>
+
+    <iframe src="footer.html" style="width: 100%; height: 40px; border: none; overflow: hidden;"></iframe>
+
+    <script>
+        const url = "https://raw.githubusercontent.com/AlphaStone-MCPE/server/main/banned.json";
+        let players = [];
+
+        async function loadData() {
+            const response = await fetch(url);
+            const data = await response.json();
+            players = data.sort((a, b) => a.nickname.localeCompare(b.nickname));
+            fillDateFilter(players);
+            renderTable(players);
+        }
+
+        function renderTable(list) {
+            const table = document.getElementById("banTable");
+            table.innerHTML = "";
+            list.forEach(p => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${p.nickname}</td>
+                    <td>${p.reason || ""}</td>
+                    <td>${p.time || ""}</td>
+                `;
+                table.appendChild(row);
+            });
+        }
+
+        function fillDateFilter(list) {
+            const filter = document.getElementById("filterTime");
+            const dates = [...new Set(list.map(p => p.time).filter(t => t))];
+            dates.sort();
+            dates.forEach(d => {
+                const option = document.createElement("option");
+                option.value = d;
+                option.textContent = d;
+                filter.appendChild(option);
+            });
+        }
+
+        document.getElementById("search").addEventListener("input", e => {
+            const q = e.target.value.toLowerCase();
+            const filtered = players.filter(p =>
+                p.nickname.toLowerCase().includes(q) ||
+                (p.reason && p.reason.toLowerCase().includes(q))
+            );
+            renderTable(filtered);
+        });
+
+        document.getElementById("filterTime").addEventListener("change", e => {
+            const val = e.target.value;
+            const filtered = val === "all"
+                ? players
+                : players.filter(p => p.time === val);
+            renderTable(filtered);
+        });
+
+        loadData();
+    </script>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+</html>

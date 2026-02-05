@@ -152,7 +152,7 @@
     </script>
     <script>
     function updateServerStatus() {
-        fetch('https://api.mcsrvstat.us/3/alphastone.ddns.net:19132')
+        fetch('https://api.mcstatus.io/v2/status/bedrock/alphastone.ddns.net:19132')
             .then(response => response.json())
             .then(data => {
                 const container = document.getElementById('server-status');
